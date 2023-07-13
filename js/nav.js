@@ -34,5 +34,14 @@ function updateNavOnLogin() {
   $(".main-nav-links").show();
   $navLogin.hide();
   $navLogOut.show();
+  $navLeft.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+/** Displays form to add a new story when 'submit' button is clicked. */
+function displayAddStoryForm() {
+  $('#post-story-form').show();
+}
+
+/** Click handler for displaying an add-story form */
+$navSubmit.on("click", displayAddStoryForm);
