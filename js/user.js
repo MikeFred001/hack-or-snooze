@@ -4,7 +4,7 @@
 let currentUser;
 
 /******************************************************************************
- * User login/signup/login
+ * User login/signup/logout
  */
 
 /** Handle login form submission. If login ok, sets up the user instance */
@@ -20,6 +20,8 @@ async function login(evt) {
   // User.login retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
   currentUser = await User.login(username, password);
+    // Why is the new keyword not needed here. What functionality does using await
+    // with a class name have?
 
   $loginForm.trigger("reset");
 

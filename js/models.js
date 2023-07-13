@@ -24,6 +24,7 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
+    console.log("getHostName", this.url);
     // UNIMPLEMENTED: complete this function!
     return "hostname.com";
   }
@@ -74,6 +75,7 @@ class StoryList {
    */
 
   async addStory( /* user, newStory */) {
+    // POST request
     // UNIMPLEMENTED: complete this function!
   }
 }
