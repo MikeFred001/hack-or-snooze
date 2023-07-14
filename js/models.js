@@ -25,8 +25,12 @@ class Story {
 
   getHostName() {
     console.log("getHostName", this.url);
-    // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+
+    if (this.url.slice(0, 5) === 'http:') {
+      return this.url.substring(7);
+    } else if (this.url.slice(0, 5) === 'https') {
+      return this.url.substring(8);
+    }
   }
 }
 

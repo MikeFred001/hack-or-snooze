@@ -52,10 +52,11 @@ function putStoriesOnPage() {
 }
 
 
-// This function should get the data from the form, call the
-// addStory method you wrote, and then put that new story on the page.
+/** Gets the data from the form, calls the
+ * addStory method, and then puts that new story on the page.
+ */
 
-async function addNewStoryToStoriesList() {
+async function addNewStoryToPage() {
 
   const storyData = {
     author: $("#author").val(),
@@ -65,8 +66,19 @@ async function addNewStoryToStoriesList() {
 
   const newStory = await storyList.addStory(currentUser, storyData);
 
-  console.log("newStory: ", newStory);
-
+  let newStoryMarkup = generateStoryMarkup(newStory);
+  $allStoriesList.prepend(newStoryMarkup);
 }
+
+/** Handles submit for new story form.
+ * Populates new story on the page and collapses new story form.
+ */
+$('#post-story-form').on("submit", function(evt) {
+  evt.preventDefault();
+
+  addNewStoryToPage();
+
+  $('#post-story-form').slideUp();
+});
 
 
