@@ -21,11 +21,16 @@ async function getAndShowStoriesOnStart() {
 
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
+  let iconClass = "far fa-star";
+
+  if (story.isFavorited) {
+    iconClass = "fas fa-star";
+  }
 
   const hostName = story.getHostName();
   return $(`
-      <li id="${story.storyId}">
-        <span class="star"><i class="far fa-star"></i></span>
+      <li class="storyEntry" id="${story.storyId}">
+        <span class="star"><i class="${iconClass}"></i></span>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -35,6 +40,12 @@ function generateStoryMarkup(story) {
       </li>
     `);
 }
+
+/* <i class="bi bi-star-fill"></i>
+<i class="bi bi-star"></i> */
+
+// Change from FA to bootstrap later
+
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
@@ -80,4 +91,21 @@ async function addNewStoryToPage(evt) {
  */
 $postStoryForm.on("submit", addNewStoryToPage);
 
+$('.stories-container').on("click", ".fa-star", async function(evt){
+  $(evt.target).toggleClass('far').toggleClass('fas');
 
+  const targetFavoriteStory = addFavoriteToPage(evt);
+  await currentUser.addFavorite(targetFavoriteStory);
+})
+
+function addFavoriteToPage(evt) {
+  const id = $(evt.target).closest(".storyEntry").attr("id");
+  console.log("id", id);
+
+  for(let story of storyList.stories) {
+    if (story.storyId === id) {
+      story.isFavorited = true;
+      return story;
+    }
+  }
+}

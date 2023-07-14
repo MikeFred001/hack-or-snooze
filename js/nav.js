@@ -12,9 +12,26 @@ function navAllStories(evt) {
   hidePageComponents();
   putStoriesOnPage();
   $postStoryForm.hide();
+  $favoritedStories.hide();
 }
 
 $body.on("click", "#nav-all", navAllStories);
+
+function showFavoritesOnPage() {
+  console.debug("showFavoritesOnPage", showFavoritesOnPage);
+  $favoritedStories.empty();
+
+  // loop through all of our stories and generate HTML for them
+  for (let favoriteStory of currentUser.favorites) {
+    const $favoriteStoriesMarkup = generateStoryMarkup(favoriteStory);
+    $favoritedStories.append($favoriteStoriesMarkup);
+  }
+
+  $allStoriesList.hide();
+  $favoritedStories.show();
+}
+
+$body.on("click", "#nav-favorites", showFavoritesOnPage);
 
 /** Show login/signup on click on "login" */
 

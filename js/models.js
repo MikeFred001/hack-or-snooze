@@ -19,6 +19,7 @@ class Story {
     this.url = url;
     this.username = username;
     this.createdAt = createdAt;
+    this.isFavorited = false;
   }
 
   /** Parses hostname out of URL and returns it. */
