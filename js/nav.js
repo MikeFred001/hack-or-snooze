@@ -11,6 +11,7 @@ function navAllStories(evt) {
   evt.preventDefault();
   hidePageComponents();
   putStoriesOnPage();
+  $postStoryForm.hide();
 }
 
 $body.on("click", "#nav-all", navAllStories);
