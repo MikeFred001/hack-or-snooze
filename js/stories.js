@@ -2,7 +2,6 @@
 
 // This is the global list of the stories, an instance of StoryList
 let storyList;
-const  $postStoryForm = $('#post-story-form');
 
 /** Get and show stories when site first loads. */
 

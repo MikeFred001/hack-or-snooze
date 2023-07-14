@@ -75,6 +75,7 @@ class StoryList {
    * - user - the current instance of User who will post the story
    * - obj of {title, author, url}
    *
+   * Adds new story instance to storyList array
    * Returns the new Story instance
    */
 
@@ -94,8 +95,10 @@ class StoryList {
     })
 
     const storyApiObj = response.data.story;
+    const newInstanceOfStory = new Story(storyApiObj);
+    storyList.stories.push(newInstanceOfStory);
 
-    return new Story(storyApiObj);
+    return newInstanceOfStory;
   }
 }
 

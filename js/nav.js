@@ -40,7 +40,7 @@ function updateNavOnLogin() {
 
 /** Displays form to add a new story when 'submit' button is clicked. */
 function displayAddStoryForm() {
-  $('#post-story-form').show();
+  $postStoryForm.show();
 }
 
 /** Click handler for displaying an add-story form */
