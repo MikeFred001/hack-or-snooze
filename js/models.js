@@ -24,13 +24,9 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
-    console.log("getHostName", this.url);
+    const url = new URL(this.url);
 
-    if (this.url.slice(0, 5) === 'http:') {
-      return this.url.substring(7);
-    } else if (this.url.slice(0, 5) === 'https') {
-      return this.url.substring(8);
-    }
+    return url.hostname;
   }
 }
 
@@ -96,7 +92,7 @@ class StoryList {
 
     const storyApiObj = response.data.story;
     const newInstanceOfStory = new Story(storyApiObj);
-    storyList.stories.push(newInstanceOfStory);
+    this.stories.push(newInstanceOfStory);
 
     return newInstanceOfStory;
   }

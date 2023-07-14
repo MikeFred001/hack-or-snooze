@@ -53,10 +53,11 @@ function putStoriesOnPage() {
 
 
 /** Gets the data from the form, calls the
- * addStory method, and then puts that new story on the page.
+ * addStory method to add story to api, and then puts that new story on the page.
  */
 
-async function addNewStoryToPage() {
+async function addNewStoryToPage(evt) {
+  evt.preventDefault();
 
   const storyData = {
     author: $("#author").val(),
@@ -66,20 +67,16 @@ async function addNewStoryToPage() {
 
   const newStory = await storyList.addStory(currentUser, storyData);
 
-  let newStoryMarkup = generateStoryMarkup(newStory);
-  $allStoriesList.prepend(newStoryMarkup);
+  let $newStoryMarkup = generateStoryMarkup(newStory);
+  $allStoriesList.prepend($newStoryMarkup);
+
+  $postStoryForm.slideUp();
 }
 
 
 /** Handles submit for new story form.
  * Populates new story on the page and collapses new story form.
  */
-$postStoryForm.on("submit", function(evt) {
-  evt.preventDefault();
-
-  addNewStoryToPage();
-
-  $postStoryForm.slideUp();
-});
+$postStoryForm.on("submit", addNewStoryToPage);
 
 
