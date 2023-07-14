@@ -213,4 +213,23 @@ class User {
       return null;
     }
   }
+
+  async addFavorite(storyInstance){
+    console.log("Story Instance", storyInstance);
+    const response = await axios({
+      method: "post",
+      url: `${BASE_URL}/users/${this.username}/favorites/${storyInstance.storyId}`,
+      data: {
+        token: currentUser.loginToken,
+      }
+    })
+
+    this.favorites.push(storyInstance);
+    console.log("Story List", storyList.stories);
+    console.log("Favorites Array", this.favorites);
+  }
+
+  removeFavorite(storyInstance){
+
+  }
 }
