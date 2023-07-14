@@ -2,6 +2,7 @@
 
 // This is the global list of the stories, an instance of StoryList
 let storyList;
+const  $postStoryForm = $('#post-story-form');
 
 /** Get and show stories when site first loads. */
 
@@ -70,15 +71,16 @@ async function addNewStoryToPage() {
   $allStoriesList.prepend(newStoryMarkup);
 }
 
+
 /** Handles submit for new story form.
  * Populates new story on the page and collapses new story form.
  */
-$('#post-story-form').on("submit", function(evt) {
+$postStoryForm.on("submit", function(evt) {
   evt.preventDefault();
 
   addNewStoryToPage();
 
-  $('#post-story-form').slideUp();
+  $postStoryForm.slideUp();
 });
 
 
