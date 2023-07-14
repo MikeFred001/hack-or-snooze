@@ -88,7 +88,7 @@ class StoryList {
           url: newStory.url
         }
       }
-    })
+    });
 
     const storyApiObj = response.data.story;
     const newInstanceOfStory = new Story(storyApiObj);
@@ -214,7 +214,11 @@ class User {
     }
   }
 
-  async addFavorite(storyInstance){
+  /** This function accepts an instance of the Story class and sends the instance data for the story to the API, adding the specified 'story' to the current user's 'favorites' array.
+   */
+
+  async addFavorite(storyInstance) {
+
     console.log("Story Instance", storyInstance);
     const response = await axios({
       method: "post",
@@ -222,14 +226,35 @@ class User {
       data: {
         token: currentUser.loginToken,
       }
-    })
+    });
 
     this.favorites.push(storyInstance);
     console.log("Story List", storyList.stories);
     console.log("Favorites Array", this.favorites);
   }
 
-  removeFavorite(storyInstance){
+    /** This function accepts an instance of the Story class and
+     * requests the API to remove the resource specified
+     * from the favorites array.
+   */
 
+  async removeFavorite(storyInstance) {
+
+    const response = await axios({
+      method: "delete",
+      url: `${BASE_URL}/users/${this.username}/favorites/${storyInstance.storyId}`,
+      data: {
+        token: currentUser.loginToken,
+      }
+    });
+
+    for (let i = 0; i < this.favorites.length; i++) {
+      if (storyInstance.storyId === this.favorites[i].storyId) {
+        this.favorites.splice(i, 1);
+      }
+    }
+
+    console.log('Favorites Array: ', this.favorites);
   }
+
 }
